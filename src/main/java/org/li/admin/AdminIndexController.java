@@ -17,17 +17,9 @@ public class AdminIndexController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("login")
-    public String login() {
-        if(SecurityUtils.getSubject().isAuthenticated()){
-            return "redirect:/index";
-        }
-
-        return "admin/login";
-    }
-
     @RequestMapping("index")
-    public void index() {
-        System.out.println("adfas");
+    public String index() {
+
+        return "index";
     }
 }
