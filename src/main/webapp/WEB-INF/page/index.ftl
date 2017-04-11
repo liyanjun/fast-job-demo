@@ -920,8 +920,8 @@
     </div>
     <script src="<@s.url '/resource/js/jquery.min.js?v=2.1.4'/>"></script>
     <script src="<@s.url '/resource/js/bootstrap.min.js?v=3.3.6'/>"></script>
-    <script src="<@s.url '/resource/js/jquery.metisMenu.js'/>"></script>
-    <script src="<@s.url '/resource/js/jquery.slimscroll.min.js'/>"></script>
+    <script src="<@s.url '/resource/js/plugins/metisMenu/jquery.metisMenu.js'/>"></script>
+    <script src="<@s.url '/resource/js/plugins/slimscroll/jquery.slimscroll.min.js'/>"></script>
     <script src="<@s.url '/resource/js/plugins/layer/layer.min.js'/>"></script>
     <script src="<@s.url '/resource/js/hplus.min.js?v=4.1.0'/>"></script>
     <script type="text/javascript" src="<@s.url '/resource/js/contabs.min.js'/>"></script>
