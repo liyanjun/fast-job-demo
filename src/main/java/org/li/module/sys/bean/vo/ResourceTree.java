@@ -3,21 +3,26 @@ package org.li.module.sys.bean.vo;
 
 import org.li.module.sys.bean.SysResource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ResourceTree {
 
     private Integer id;
     private int pId;
-    private String name;
+    private String text;
     private boolean open;
     private boolean checked;
+    private List<ResourceTree> nodes;
 
-    private ResourceTree(Integer id, int pid, String name, boolean isChecked) {
+    private ResourceTree(Integer id, int pid, String text, boolean isChecked) {
 
         this.id = id;
         this.pId = pid;
-        this.name = name;
+        this.text = text;
         this.open = true;
         checked = isChecked;
+        nodes = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -40,14 +45,14 @@ public class ResourceTree {
         this.pId = pId;
     }
 
-    public String getName() {
+    public String getText() {
 
-        return name;
+        return text;
     }
 
-    public void setName(String name) {
+    public void setText(String text) {
 
-        this.name = name;
+        this.text = text;
     }
 
     public boolean isOpen() {
@@ -73,5 +78,10 @@ public class ResourceTree {
     public static ResourceTree toResource(SysResource r, boolean isChecked) {
         ResourceTree t = new ResourceTree(r.getId(), r.getPid(), r.getName(), isChecked);
         return t;
+    }
+
+    public ResourceTree addNode(ResourceTree resourceTree){
+        nodes.add(resourceTree);
+        return this;
     }
 }

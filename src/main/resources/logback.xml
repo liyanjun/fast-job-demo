@@ -2,14 +2,14 @@
 <configuration>
 
 	<!-- 控制台日志输出设置 -->
-	<appender name="CONSOLE-APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+	<appender text="CONSOLE-APPENDER" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>%d [%t] %-5p [%c:%L] - %m%n</pattern>
 		</encoder>
 	</appender>
 
 	<!-- 按时间滚动的策略显示日志 -->
-	<appender name="FILE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender text="FILE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>logs/org-li.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>logs/org-li-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
@@ -23,7 +23,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="org.li" level="DEBUG" />
+	<logger text="org.li" level="DEBUG" />
 
 	<root level="DEBUG">
 		<appender-ref ref="CONSOLE-APPENDER" />

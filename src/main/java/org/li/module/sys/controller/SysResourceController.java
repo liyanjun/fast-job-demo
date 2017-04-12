@@ -18,28 +18,42 @@ import java.util.List;
 import java.util.UUID;
 
 
-@Controller("management.resourceController")
-@RequestMapping(value = "/management/resource")
+@Controller
+@RequestMapping(value = "/resource")
 public class SysResourceController {
 
     @Autowired
     private SysResourceService sysResourceService;
 
-    @RequestMapping("")
+    @RequestMapping("/tree")
     public String list(Model model) {
 
         // List<User> userList = userMgr.searchUser(vo);
         // Integer totalCount = userMgr.searchUserNum(vo);
         List<SysResource> resList = sysResourceService.findAll();
         List<ResourceTree> treeList = new ArrayList<ResourceTree>();
-        for (SysResource resource : resList) {
-            treeList.add(ResourceTree.toResource(resource, false));
+
+
+        for (SysResource re: resList){
+            if(re.getPid() == 0){
+                ResourceTree resourceTree = ResourceTree.toResource(re, false);
+                treeList.add(findChild(resourceTree,resList));
+            }
         }
         String resTree = new Gson().toJson(treeList);
 
-        model.addAttribute("resTree", resTree);
+        model.addAttribute("rootNode", resTree);
 
-        return "/management/resource/treeList.jsp";
+        return "/system/resource_tree";
+    }
+
+    private ResourceTree findChild(ResourceTree resourceTree,List<SysResource> sysResources){
+        for (SysResource subResource : sysResources) {
+            if (subResource.getPid().intValue() == resourceTree.getId()){
+                resourceTree.addNode(findChild(ResourceTree.toResource(subResource, false),sysResources));
+            }
+        }
+        return resourceTree;
     }
 
     @RequestMapping("/addPage")

@@ -63,7 +63,7 @@
         ROLE_ID = #{id}
     </delete>
 
-    <!-- <delete id="deletes" parameterType="com.microticket.jinglian.admin.bean.sys.ResourceDelete">
+    <!-- <delete id="deletes" parameterType="org.li.module.sys.bean.ResourceDelete">
         <![CDATA[ delete from sys_permission where ROLE_ID = #{roleId} AND RESOURCE_ID
         in ]]> <foreach collection="resIds" item="model" open="(" separator="," close=")">#{
         model} </foreach> </delete> -->
@@ -93,7 +93,7 @@
     </select>
 
     <!-- 更新 -->
-    <update id="updateSelective" parameterType="com.microticket.jinglian.admin.bean.sys.SysPermission">
+    <update id="updateSelective" parameterType="org.li.module.sys.bean.SysPermission">
         UPDATE sys_permission
         <set>
         </set>
@@ -102,7 +102,7 @@
         RESOURCE_ID = #{resourceId}
     </update>
 
-    <update id="update" parameterType="com.microticket.jinglian.admin.bean.sys.SysPermission">
+    <update id="update" parameterType="org.li.module.sys.bean.SysPermission">
         UPDATE sys_permission SET
         WHERE
         ROLE_ID = #{roleId} AND

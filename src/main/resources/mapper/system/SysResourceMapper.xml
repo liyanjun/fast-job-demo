@@ -213,7 +213,6 @@
           </if>
         </if>
          -->
-         and is_del = -1
       </trim>
       <trim suffixOverrides="and">
         <if test="whereSql!=null">

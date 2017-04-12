@@ -68,7 +68,7 @@
     </select>
 
     <!-- 更新 -->
-    <update id="updateSelective" parameterType="com.microticket.jinglian.admin.bean.sys.SysUserRole">
+    <update id="updateSelective" parameterType="org.li.module.sys.bean.SysUserRole">
         UPDATE sys_user_role
         <set>
         </set>
@@ -77,7 +77,7 @@
         ROLE_ID = #{roleId}
     </update>
 
-    <update id="update" parameterType="com.microticket.jinglian.admin.bean.sys.SysUserRole">
+    <update id="update" parameterType="org.li.module.sys.bean.SysUserRole">
         UPDATE sys_user_role SET
         WHERE
         USER_ID = #{userId}  AND

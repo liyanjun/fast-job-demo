@@ -10,12 +10,12 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath*:/mapper/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath*:/mapper/**/*Mapper.xml"/>
     </bean>
 
     <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.li.module.system.dao"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property text="basePackage" value="org.li.module.system.dao"/>
+        <property text="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>-->
 
     <!-- 事务配置 -->
