@@ -11,4 +11,5 @@ import org.li.module.sys.bean.SysResource;
  */
 public interface SysResourceDao extends IDao<Integer, SysResource> {
 
+    int checkResCode(String resCode);
 }

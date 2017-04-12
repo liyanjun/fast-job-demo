@@ -2,6 +2,7 @@
 package org.li.module.sys.dao.impl;
 
 import org.li.common.base.dao.BaseDao;
+import org.li.common.base.page.PageInfo;
 import org.li.module.sys.bean.SysResource;
 import org.li.module.sys.dao.SysResourceDao;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SysResourceDaoImpl extends BaseDao<Integer, SysResource> implements SysResourceDao {
 
+    @Override
+    public int checkResCode(String resCode) {
+        Object e = this.getSqlSession().selectOne(this.getMapperNameSpace() + ".checkResCode", resCode);
+        return ((Integer) e).intValue();
+    }
 }

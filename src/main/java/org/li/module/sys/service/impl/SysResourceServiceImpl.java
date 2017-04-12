@@ -4,10 +4,12 @@ package org.li.module.sys.service.impl;
 import org.li.common.base.page.PageInfo;
 import org.li.common.base.page.PagerControl;
 import org.li.module.sys.bean.SysResource;
-import org.li.module.sys.service.SysResourceService;
 import org.li.module.sys.dao.SysResourceDao;
+import org.li.module.sys.service.SysResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author liyanjun
@@ -43,6 +45,17 @@ public class SysResourceServiceImpl implements SysResourceService {
 
     public SysResource find(Integer id) {
         return sysResourceDao.getEntityById(id);
+    }
+
+    @Override
+    public List<SysResource> findAll() {
+        return sysResourceDao.getAllEntityObj();
+    }
+
+    @Override
+    public boolean checkResourceCode(String resCode) {
+        int i = sysResourceDao.checkResCode(resCode);
+        return i > 0 ? false : true;
     }
 
 }

@@ -197,6 +197,11 @@
 			id = #{id} 		
   </update>
 
+	<select id="checkResCode" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT count(ID) FROM
+		sys_resource WHERE res_code = #{resCode}
+	</select>
+
   <!--查询条件-->
   <sql id="selectCondition">
     <where>

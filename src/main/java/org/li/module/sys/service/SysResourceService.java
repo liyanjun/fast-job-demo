@@ -5,6 +5,8 @@ import org.li.common.base.page.PageInfo;
 import org.li.common.base.page.PagerControl;
 import org.li.module.sys.bean.SysResource;
 
+import java.util.List;
+
 
 /**
  * 
@@ -20,5 +22,8 @@ public interface SysResourceService {
     PagerControl<SysResource> page(SysResource sysResource, PageInfo pageInfo, String whereSql, String orderSql);
 
     SysResource find(Integer id);
-    
+
+    List<SysResource> findAll();
+
+    boolean checkResourceCode(String resCode);
 }
