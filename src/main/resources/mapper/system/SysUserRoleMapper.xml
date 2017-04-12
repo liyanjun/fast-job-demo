@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- author:   liyanjun,  date:    2017-4-12 10:42:25,    -->
+
+<mapper namespace="org.li.module.sys.dao.impl.SysUserRoleDaoImpl">
+    <resultMap id="rm" type="org.li.module.sys.bean.SysUserRole">
+        <result property="userId" jdbcType="INTEGER" column="USER_ID"/>
+        <result property="roleId" jdbcType="INTEGER" column="ROLE_ID"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        USER_ID,
+        ROLE_ID
+    </sql>
+    <select id="findById" parameterType="java.lang.Integer" resultMap="rm">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_user_role
+        WHERE
+        USER_ID = #{id} AND
+        ROLE_ID = #{id}
+    </select>
+
+    <select id="findRoleByUserId" parameterType="java.lang.Integer" resultMap="rm">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_user_role
+        WHERE
+        USER_ID = #{id}
+    </select>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+        DELETE FROM sys_user_role WHERE
+        USER_ID = #{id}
+    </delete>
+
+    <!-- 查询所有的ID -->
+    <select id="findAllIds" resultType="java.lang.Integer">
+        SELECT USER_ID FROM sys_user_role
+    </select>
+
+    <!-- 按Id删除 -->
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM sys_user_role WHERE
+        USER_ID = #{id}  AND
+        ROLE_ID = #{id}
+    </delete>
+    <!-- 插入 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO sys_user_role (
+        USER_ID,
+        ROLE_ID
+        ) VALUES (
+        #{userId},
+        #{roleId}
+        )
+    </insert>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        SELECT count(USER_ID) FROM sys_user_role
+    </select>
+
+    <select id="findAll" resultMap="rm">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_user_role
+    </select>
+
+    <!-- 更新 -->
+    <update id="updateSelective" parameterType="com.microticket.jinglian.admin.bean.sys.SysUserRole">
+        UPDATE sys_user_role
+        <set>
+        </set>
+        WHERE
+        USER_ID = #{userId} AND
+        ROLE_ID = #{roleId}
+    </update>
+
+    <update id="update" parameterType="com.microticket.jinglian.admin.bean.sys.SysUserRole">
+        UPDATE sys_user_role SET
+        WHERE
+        USER_ID = #{userId}  AND
+        ROLE_ID = #{roleId}
+    </update>
+
+</mapper>

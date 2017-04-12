@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- author:   liyanjun,  date:    2017-4-12 10:42:25,    -->
+
+<mapper namespace="org.li.module.sys.dao.impl.SysUserDaoImpl" >
+  <resultMap id="BaseResultMap" type="org.li.module.sys.bean.SysUser" >
+		<result property="id" jdbcType="INTEGER" column="id"/>
+		<result property="sex" jdbcType="BIT" column="sex"/>
+		<result property="realname" jdbcType="VARCHAR" column="realname"/>
+		<result property="username" jdbcType="VARCHAR" column="username"/>
+		<result property="password" jdbcType="VARCHAR" column="password"/>
+		<result property="nickname" jdbcType="VARCHAR" column="nickname"/>
+		<result property="dep" jdbcType="VARCHAR" column="dep"/>
+		<result property="position" jdbcType="VARCHAR" column="position"/>
+		<result property="email" jdbcType="VARCHAR" column="email"/>
+		<result property="phone" jdbcType="VARCHAR" column="phone"/>
+		<result property="status" jdbcType="TINYINT" column="status"/>
+		<result property="birthDate" jdbcType="TIMESTAMP" column="birth_date"/>
+		<result property="insertDate" jdbcType="TIMESTAMP" column="insert_date"/>
+		<result property="updateDate" jdbcType="TIMESTAMP" column="update_date"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+		id,
+		sex,
+		realname,
+		username,
+		password,
+		nickname,
+		dep,
+		position,
+		email,
+		phone,
+		status,
+		birth_date,
+		insert_date,
+		update_date	
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    where  
+			id = #{id} 		
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_user
+    where  
+			id = #{id} 		
+  </delete>
+  <insert id="insert" parameterType="org.li.module.sys.bean.SysUser" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_user (<include refid="Base_Column_List" />
+      )
+    values (
+	        null,<!--主键自动生成  -->
+			#{sex},
+			#{realname},
+			#{username},
+			#{password},
+			#{nickname},
+			#{dep},
+			#{position},
+			#{email},
+			#{phone},
+			#{status},
+			#{birthDate},
+			#{insertDate},
+			#{updateDate}      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.li.module.sys.bean.SysUser" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    		<if test=" id != null" >
+	        	id,
+	        </if>
+    		<if test=" sex != null" >
+	        	sex,
+	        </if>
+    		<if test=" realname != null" >
+	        	realname,
+	        </if>
+    		<if test=" username != null" >
+	        	username,
+	        </if>
+    		<if test=" password != null" >
+	        	password,
+	        </if>
+    		<if test=" nickname != null" >
+	        	nickname,
+	        </if>
+    		<if test=" dep != null" >
+	        	dep,
+	        </if>
+    		<if test=" position != null" >
+	        	position,
+	        </if>
+    		<if test=" email != null" >
+	        	email,
+	        </if>
+    		<if test=" phone != null" >
+	        	phone,
+	        </if>
+    		<if test=" status != null" >
+	        	status,
+	        </if>
+    		<if test=" birthDate != null" >
+	        	birth_date,
+	        </if>
+    		<if test=" insertDate != null" >
+	        	insert_date,
+	        </if>
+    		<if test=" updateDate != null" >
+	        	update_date,
+	        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+    		<if test=" id != null" >
+	        	#{id},
+	        </if>
+    		<if test=" sex != null" >
+	        	#{sex},
+	        </if>
+    		<if test=" realname != null" >
+	        	#{realname},
+	        </if>
+    		<if test=" username != null" >
+	        	#{username},
+	        </if>
+    		<if test=" password != null" >
+	        	#{password},
+	        </if>
+    		<if test=" nickname != null" >
+	        	#{nickname},
+	        </if>
+    		<if test=" dep != null" >
+	        	#{dep},
+	        </if>
+    		<if test=" position != null" >
+	        	#{position},
+	        </if>
+    		<if test=" email != null" >
+	        	#{email},
+	        </if>
+    		<if test=" phone != null" >
+	        	#{phone},
+	        </if>
+    		<if test=" status != null" >
+	        	#{status},
+	        </if>
+    		<if test=" birthDate != null" >
+	        	#{birthDate},
+	        </if>
+    		<if test=" insertDate != null" >
+	        	#{insertDate},
+	        </if>
+    		<if test=" updateDate != null" >
+	        	#{updateDate},
+	        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.li.module.sys.bean.SysUser" >
+	UPDATE sys_user 
+		<set>
+				<if test="sex!=null">
+					sex = #{sex},
+				</if>
+				<if test="realname!=null">
+					realname = #{realname},
+				</if>
+				<if test="username!=null">
+					username = #{username},
+				</if>
+				<if test="password!=null">
+					password = #{password},
+				</if>
+				<if test="nickname!=null">
+					nickname = #{nickname},
+				</if>
+				<if test="dep!=null">
+					dep = #{dep},
+				</if>
+				<if test="position!=null">
+					position = #{position},
+				</if>
+				<if test="email!=null">
+					email = #{email},
+				</if>
+				<if test="phone!=null">
+					phone = #{phone},
+				</if>
+				<if test="status!=null">
+					status = #{status},
+				</if>
+				<if test="birthDate!=null">
+					birth_date = #{birthDate},
+				</if>
+				<if test="insertDate!=null">
+					insert_date = #{insertDate},
+				</if>
+				<if test="updateDate!=null">
+					update_date = #{updateDate},
+				</if>
+		</set>
+	WHERE 
+		id = #{id}		
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.li.module.sys.bean.SysUser" >
+    update sys_user set 
+			sex = #{sex},
+			realname = #{realname},
+			username = #{username},
+			password = #{password},
+			nickname = #{nickname},
+			dep = #{dep},
+			position = #{position},
+			email = #{email},
+			phone = #{phone},
+			status = #{status},
+			birth_date = #{birthDate},
+			insert_date = #{insertDate},
+			update_date = #{updateDate}		
+    where 
+			id = #{id} 		
+  </update>
+
+  <!--查询条件-->
+  <sql id="selectCondition">
+    <where>
+      <trim suffixOverrides="and">
+      	<!-- 
+        <if test=" entity != null">
+          <if test="entity.id!=null">
+            and id=#{entity.id}
+          </if>
+        </if>
+         -->
+         and is_del = -1
+      </trim>
+      <trim suffixOverrides="and">
+        <if test="whereSql!=null">
+          and ${whereSql}
+        </if>
+      </trim>
+    </where>
+  </sql>
+
+  <!-- 根据条件查询 -->
+  <select id="getListByEntityAndPageInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    <include refid="selectCondition" />
+    <if test="orderBy!=null">
+      ${orderBy}
+    </if>
+    <if test="pageInfo!=null">
+      limit ${pageInfo.pagesize} offset ${pageInfo.startIndex}
+    </if>
+  </select>
+
+  <!-- 查询总数 -->
+  <select id="getTotalByEntity" resultType="java.lang.Integer">
+    select count(*) from sys_user
+    <include refid="selectCondition" />
+  </select>
+  
+</mapper>

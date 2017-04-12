@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- author:   liyanjun,  date:    2017-4-12 10:42:25,    -->
+
+<mapper namespace="org.li.module.sys.dao.impl.SysRoleDaoImpl" >
+  <resultMap id="BaseResultMap" type="org.li.module.sys.bean.SysRole" >
+		<result property="id" jdbcType="INTEGER" column="id"/>
+		<result property="rolename" jdbcType="VARCHAR" column="rolename"/>
+		<result property="remark" jdbcType="VARCHAR" column="remark"/>
+		<result property="status" jdbcType="TINYINT" column="status"/>
+		<result property="insertDate" jdbcType="TIMESTAMP" column="insert_date"/>
+		<result property="updateDate" jdbcType="TIMESTAMP" column="update_date"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+		id,
+		rolename,
+		remark,
+		status,
+		insert_date,
+		update_date	
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where  
+			id = #{id} 		
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_role
+    where  
+			id = #{id} 		
+  </delete>
+  <insert id="insert" parameterType="org.li.module.sys.bean.SysRole" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_role (<include refid="Base_Column_List" />
+      )
+    values (
+	        null,<!--主键自动生成  -->
+			#{rolename},
+			#{remark},
+			#{status},
+			#{insertDate},
+			#{updateDate}      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.li.module.sys.bean.SysRole" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    		<if test=" id != null" >
+	        	id,
+	        </if>
+    		<if test=" rolename != null" >
+	        	rolename,
+	        </if>
+    		<if test=" remark != null" >
+	        	remark,
+	        </if>
+    		<if test=" status != null" >
+	        	status,
+	        </if>
+    		<if test=" insertDate != null" >
+	        	insert_date,
+	        </if>
+    		<if test=" updateDate != null" >
+	        	update_date,
+	        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+    		<if test=" id != null" >
+	        	#{id},
+	        </if>
+    		<if test=" rolename != null" >
+	        	#{rolename},
+	        </if>
+    		<if test=" remark != null" >
+	        	#{remark},
+	        </if>
+    		<if test=" status != null" >
+	        	#{status},
+	        </if>
+    		<if test=" insertDate != null" >
+	        	#{insertDate},
+	        </if>
+    		<if test=" updateDate != null" >
+	        	#{updateDate},
+	        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.li.module.sys.bean.SysRole" >
+	UPDATE sys_role 
+		<set>
+				<if test="rolename!=null">
+					rolename = #{rolename},
+				</if>
+				<if test="remark!=null">
+					remark = #{remark},
+				</if>
+				<if test="status!=null">
+					status = #{status},
+				</if>
+				<if test="insertDate!=null">
+					insert_date = #{insertDate},
+				</if>
+				<if test="updateDate!=null">
+					update_date = #{updateDate},
+				</if>
+		</set>
+	WHERE 
+		id = #{id}		
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.li.module.sys.bean.SysRole" >
+    update sys_role set 
+			rolename = #{rolename},
+			remark = #{remark},
+			status = #{status},
+			insert_date = #{insertDate},
+			update_date = #{updateDate}		
+    where 
+			id = #{id} 		
+  </update>
+
+  <!--查询条件-->
+  <sql id="selectCondition">
+    <where>
+      <trim suffixOverrides="and">
+      	<!-- 
+        <if test=" entity != null">
+          <if test="entity.id!=null">
+            and id=#{entity.id}
+          </if>
+        </if>
+         -->
+         and is_del = -1
+      </trim>
+      <trim suffixOverrides="and">
+        <if test="whereSql!=null">
+          and ${whereSql}
+        </if>
+      </trim>
+    </where>
+  </sql>
+
+  <!-- 根据条件查询 -->
+  <select id="getListByEntityAndPageInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    <include refid="selectCondition" />
+    <if test="orderBy!=null">
+      ${orderBy}
+    </if>
+    <if test="pageInfo!=null">
+      limit ${pageInfo.pagesize} offset ${pageInfo.startIndex}
+    </if>
+  </select>
+
+  <!-- 查询总数 -->
+  <select id="getTotalByEntity" resultType="java.lang.Integer">
+    select count(*) from sys_role
+    <include refid="selectCondition" />
+  </select>
+  
+</mapper>

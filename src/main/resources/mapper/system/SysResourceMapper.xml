@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- author:   liyanjun,  date:    2017-4-12 10:42:25,    -->
+
+<mapper namespace="org.li.module.sys.dao.impl.SysResourceDaoImpl" >
+  <resultMap id="BaseResultMap" type="org.li.module.sys.bean.SysResource" >
+		<result property="id" jdbcType="INTEGER" column="id"/>
+		<result property="name" jdbcType="VARCHAR" column="name"/>
+		<result property="pid" jdbcType="INTEGER" column="pid"/>
+		<result property="url" jdbcType="VARCHAR" column="url"/>
+		<result property="tag" jdbcType="VARCHAR" column="tag"/>
+		<result property="resType" jdbcType="TINYINT" column="res_type"/>
+		<result property="resCode" jdbcType="VARCHAR" column="res_code"/>
+		<result property="insertDate" jdbcType="TIMESTAMP" column="insert_date"/>
+		<result property="updateDate" jdbcType="TIMESTAMP" column="update_date"/>
+		<result property="remark" jdbcType="VARCHAR" column="remark"/>
+		<result property="navtabId" jdbcType="VARCHAR" column="navtab_id"/>
+		<result property="external" jdbcType="BIT" column="external"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+		id,
+		name,
+		pid,
+		url,
+		tag,
+		res_type,
+		res_code,
+		insert_date,
+		update_date,
+		remark,
+		navtab_id,
+		external	
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_resource
+    where  
+			id = #{id} 		
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_resource
+    where  
+			id = #{id} 		
+  </delete>
+  <insert id="insert" parameterType="org.li.module.sys.bean.SysResource" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_resource (<include refid="Base_Column_List" />
+      )
+    values (
+	        null,<!--主键自动生成  -->
+			#{name},
+			#{pid},
+			#{url},
+			#{tag},
+			#{resType},
+			#{resCode},
+			#{insertDate},
+			#{updateDate},
+			#{remark},
+			#{navtabId},
+			#{external}      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.li.module.sys.bean.SysResource" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    		<if test=" id != null" >
+	        	id,
+	        </if>
+    		<if test=" name != null" >
+	        	name,
+	        </if>
+    		<if test=" pid != null" >
+	        	pid,
+	        </if>
+    		<if test=" url != null" >
+	        	url,
+	        </if>
+    		<if test=" tag != null" >
+	        	tag,
+	        </if>
+    		<if test=" resType != null" >
+	        	res_type,
+	        </if>
+    		<if test=" resCode != null" >
+	        	res_code,
+	        </if>
+    		<if test=" insertDate != null" >
+	        	insert_date,
+	        </if>
+    		<if test=" updateDate != null" >
+	        	update_date,
+	        </if>
+    		<if test=" remark != null" >
+	        	remark,
+	        </if>
+    		<if test=" navtabId != null" >
+	        	navtab_id,
+	        </if>
+    		<if test=" external != null" >
+	        	external,
+	        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+    		<if test=" id != null" >
+	        	#{id},
+	        </if>
+    		<if test=" name != null" >
+	        	#{name},
+	        </if>
+    		<if test=" pid != null" >
+	        	#{pid},
+	        </if>
+    		<if test=" url != null" >
+	        	#{url},
+	        </if>
+    		<if test=" tag != null" >
+	        	#{tag},
+	        </if>
+    		<if test=" resType != null" >
+	        	#{resType},
+	        </if>
+    		<if test=" resCode != null" >
+	        	#{resCode},
+	        </if>
+    		<if test=" insertDate != null" >
+	        	#{insertDate},
+	        </if>
+    		<if test=" updateDate != null" >
+	        	#{updateDate},
+	        </if>
+    		<if test=" remark != null" >
+	        	#{remark},
+	        </if>
+    		<if test=" navtabId != null" >
+	        	#{navtabId},
+	        </if>
+    		<if test=" external != null" >
+	        	#{external},
+	        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.li.module.sys.bean.SysResource" >
+	UPDATE sys_resource 
+		<set>
+				<if test="name!=null">
+					name = #{name},
+				</if>
+				<if test="pid!=null">
+					pid = #{pid},
+				</if>
+				<if test="url!=null">
+					url = #{url},
+				</if>
+				<if test="tag!=null">
+					tag = #{tag},
+				</if>
+				<if test="resType!=null">
+					res_type = #{resType},
+				</if>
+				<if test="resCode!=null">
+					res_code = #{resCode},
+				</if>
+				<if test="insertDate!=null">
+					insert_date = #{insertDate},
+				</if>
+				<if test="updateDate!=null">
+					update_date = #{updateDate},
+				</if>
+				<if test="remark!=null">
+					remark = #{remark},
+				</if>
+				<if test="navtabId!=null">
+					navtab_id = #{navtabId},
+				</if>
+				<if test="external!=null">
+					external = #{external},
+				</if>
+		</set>
+	WHERE 
+		id = #{id}		
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.li.module.sys.bean.SysResource" >
+    update sys_resource set 
+			name = #{name},
+			pid = #{pid},
+			url = #{url},
+			tag = #{tag},
+			res_type = #{resType},
+			res_code = #{resCode},
+			insert_date = #{insertDate},
+			update_date = #{updateDate},
+			remark = #{remark},
+			navtab_id = #{navtabId},
+			external = #{external}		
+    where 
+			id = #{id} 		
+  </update>
+
+  <!--查询条件-->
+  <sql id="selectCondition">
+    <where>
+      <trim suffixOverrides="and">
+      	<!-- 
+        <if test=" entity != null">
+          <if test="entity.id!=null">
+            and id=#{entity.id}
+          </if>
+        </if>
+         -->
+         and is_del = -1
+      </trim>
+      <trim suffixOverrides="and">
+        <if test="whereSql!=null">
+          and ${whereSql}
+        </if>
+      </trim>
+    </where>
+  </sql>
+
+  <!-- 根据条件查询 -->
+  <select id="getListByEntityAndPageInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_resource
+    <include refid="selectCondition" />
+    <if test="orderBy!=null">
+      ${orderBy}
+    </if>
+    <if test="pageInfo!=null">
+      limit ${pageInfo.pagesize} offset ${pageInfo.startIndex}
+    </if>
+  </select>
+
+  <!-- 查询总数 -->
+  <select id="getTotalByEntity" resultType="java.lang.Integer">
+    select count(*) from sys_resource
+    <include refid="selectCondition" />
+  </select>
+  
+</mapper>
