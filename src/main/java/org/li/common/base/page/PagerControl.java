@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PagerControl<T> implements Serializable {
-    private List<T> entityList = new ArrayList<T>();
+    private List<T> rows = new ArrayList<T>();
     private PageInfo pageInfo;
     private Integer draw;
+    private Integer total;
 
     public PagerControl() {
     }
@@ -35,15 +36,23 @@ public class PagerControl<T> implements Serializable {
         this.pageInfo = pageInfo;
     }
 
-    public List<T> getEntityList() {
-        return this.entityList;
+    public List<T> getRows() {
+        return this.rows;
     }
 
-    public void setEntityList(List<T> entityList) {
-        this.entityList = entityList;
+    public void setRows(List<T> rows) {
+        this.rows = rows;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
     public String toString() {
-        return "PagerControl [entityList=" + this.entityList + ", pageInfo=" + this.pageInfo + "]";
+        return "PagerControl [rows=" + this.rows + ", pageInfo=" + this.pageInfo + "]";
     }
 }

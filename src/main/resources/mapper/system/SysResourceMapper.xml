@@ -232,7 +232,7 @@
       ${orderBy}
     </if>
     <if test="pageInfo!=null">
-      limit ${pageInfo.pagesize} offset ${pageInfo.startIndex}
+      limit ${pageInfo.limit} offset ${pageInfo.offset}
     </if>
   </select>
 

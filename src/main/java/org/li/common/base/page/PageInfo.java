@@ -16,8 +16,8 @@ public class PageInfo implements Serializable {
     private Integer isPrev = 0;
     private Integer isNext = 0;
     private List<Integer> listPages = new ArrayList();
-    private int pagesize = 20;
-    private int startIndex = 0;
+    private int limit = 20;
+    private int offset = 0;
 
     public Integer getIsPrev() {
         return this.isPrev;
@@ -48,7 +48,7 @@ public class PageInfo implements Serializable {
         }
 
         this.page = page;
-        this.startIndex = (page - 1) * pagesize;
+        this.offset = (page - 1) * limit;
     }
 
     public PageInfo(Integer page) {
@@ -57,7 +57,7 @@ public class PageInfo implements Serializable {
         }
 
         this.page = page;
-        this.startIndex = (page - 1) * pagesize;
+        this.offset = (page - 1) * limit;
     }
 
     public PageInfo(int page, int pagesize) {
@@ -66,8 +66,8 @@ public class PageInfo implements Serializable {
         }
 
         this.page = page;
-        this.pagesize = pagesize;
-        this.startIndex = (page - 1) * pagesize;
+        this.limit = pagesize;
+        this.offset = (page - 1) * pagesize;
     }
 
     public int getTotalCounts() {
@@ -80,11 +80,11 @@ public class PageInfo implements Serializable {
     }
 
     public void executePage() {
-        this.startIndex = (page - 1) * this.pagesize;
+        this.offset = (page - 1) * this.limit;
 
         if (this.totalCounts > 0) {
-            this.allPage = this.totalCounts / this.pagesize;
-            if (this.totalCounts % this.pagesize != 0) {
+            this.allPage = this.totalCounts / this.limit;
+            if (this.totalCounts % this.limit != 0) {
                 ++this.allPage;
             }
         }
@@ -129,21 +129,21 @@ public class PageInfo implements Serializable {
         this.executePage();
     }
 
-    public int getPagesize() {
-        return this.pagesize;
+    public int getLimit() {
+        return this.limit;
     }
 
-    public void setPagesize(int pagesize) {
-        this.pagesize = pagesize;
+    public void setLimit(int limit) {
+        this.limit = limit;
         this.executePage();
     }
 
-    public int getStartIndex() {
-        return this.startIndex;
+    public int getOffset() {
+        return this.offset;
     }
 
-    public void setStartIndex(int startIndex) {
-        this.startIndex = startIndex;
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
 
@@ -160,8 +160,8 @@ public class PageInfo implements Serializable {
                 ", isPrev=" + isPrev +
                 ", isNext=" + isNext +
                 ", listPages=" + listPages +
-                ", pagesize=" + pagesize +
-                ", startIndex=" + startIndex +
+                ", limit=" + limit +
+                ", offset=" + offset +
                 '}';
     }
 
@@ -170,12 +170,12 @@ public class PageInfo implements Serializable {
 //        pageInfo.setTotalCounts(60);
 //        System.out.println(pageInfo.toString());
 //        PageInfo pageInfo2 = new PageInfo();
-//        pageInfo2.setPagesize(3);
+//        pageInfo2.setLimit(3);
 //        pageInfo2.setPage(2);
 //        System.out.println(pageInfo2.toString());
 //        PageInfo pageInfo3 = new PageInfo();
 //        pageInfo3.setPage(2);
-//        pageInfo3.setPagesize(3);
+//        pageInfo3.setLimit(3);
 //        System.out.println(pageInfo3.toString());
 
 //        PageInfo pageInfo = new PageInfo(2);

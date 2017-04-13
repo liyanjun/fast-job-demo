@@ -2,6 +2,8 @@
 package org.li.module.sys.controller;
 
 import com.google.gson.Gson;
+import org.li.common.base.page.PageInfo;
+import org.li.common.base.page.PagerControl;
 import org.li.module.sys.bean.SysResource;
 import org.li.module.sys.bean.vo.ResourceTree;
 import org.li.module.sys.service.SysResourceService;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,8 +29,22 @@ public class SysResourceController {
     @Autowired
     private SysResourceService sysResourceService;
 
+    @RequestMapping("")
+    public String index(Model model) {
+        return "/system/resource/list";
+    }
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public PagerControl list(Model model, @RequestParam Integer parentId, PageInfo pageInfo,HttpServletResponse response) {
+        SysResource sysResource = new SysResource();
+        sysResource.setPid(parentId);
+        PagerControl pagerControl = sysResourceService.page(sysResource,pageInfo,null,null);
+        return pagerControl;
+    }
+
     @RequestMapping("/tree")
-    public String list(Model model) {
+    public String tree(Model model) {
 
         // List<User> userList = userMgr.searchUser(vo);
         // Integer totalCount = userMgr.searchUserNum(vo);

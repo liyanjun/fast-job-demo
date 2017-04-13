@@ -172,9 +172,9 @@ public abstract class BaseDao<T extends Serializable, M extends BaseEntity> exte
             pageInfo.setTotalCounts(total1);
         }
         if (list != null) {
-            pagerControl.setEntityList((List) list);
+            pagerControl.setRows((List) list);
         }
-
+        pagerControl.setTotal(total1);
         pagerControl.setPageInfo(pageInfo);
         return pagerControl;
     }
