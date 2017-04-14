@@ -4,6 +4,7 @@ package org.li.module.sys.controller;
 import com.google.gson.Gson;
 import org.li.common.base.page.PageInfo;
 import org.li.common.base.page.PagerControl;
+import org.li.common.utils.GlobalIdWorker;
 import org.li.module.sys.bean.SysResource;
 import org.li.module.sys.bean.vo.ResourceTree;
 import org.li.module.sys.service.SysResourceService;
@@ -36,26 +37,24 @@ public class SysResourceController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public PagerControl list(Model model, @RequestParam Integer parentId, PageInfo pageInfo,HttpServletResponse response) {
+    public PagerControl list(Model model, @RequestParam Integer parentId, PageInfo pageInfo, HttpServletResponse response) {
         SysResource sysResource = new SysResource();
         sysResource.setPid(parentId);
-        PagerControl pagerControl = sysResourceService.page(sysResource,pageInfo,null,null);
+        PagerControl pagerControl = sysResourceService.page(sysResource, pageInfo, null, null);
         return pagerControl;
     }
 
     @RequestMapping("/tree")
     public String tree(Model model) {
 
-        // List<User> userList = userMgr.searchUser(vo);
-        // Integer totalCount = userMgr.searchUserNum(vo);
         List<SysResource> resList = sysResourceService.findAll();
         List<ResourceTree> treeList = new ArrayList<ResourceTree>();
 
 
-        for (SysResource re: resList){
-            if(re.getPid() == 0){
+        for (SysResource re : resList) {
+            if (re.getPid() == 0) {
                 ResourceTree resourceTree = ResourceTree.toResource(re, false);
-                treeList.add(findChild(resourceTree,resList));
+                treeList.add(findChild(resourceTree, resList));
             }
         }
         String resTree = new Gson().toJson(treeList);
@@ -65,48 +64,43 @@ public class SysResourceController {
         return "/system/resource_tree";
     }
 
-    private ResourceTree findChild(ResourceTree resourceTree,List<SysResource> sysResources){
+    private ResourceTree findChild(ResourceTree resourceTree, List<SysResource> sysResources) {
         for (SysResource subResource : sysResources) {
-            if (subResource.getPid().intValue() == resourceTree.getId()){
-                resourceTree.addNode(findChild(ResourceTree.toResource(subResource, false),sysResources));
+            if (subResource.getPid().intValue() == resourceTree.getId()) {
+                resourceTree.addNode(findChild(ResourceTree.toResource(subResource, false), sysResources));
             }
         }
         return resourceTree;
     }
 
     @RequestMapping("/addPage")
-    public String addPage(Model model, HttpServletRequest request) {
-
-        model.addAttribute("parentId", request.getParameter("parentId"));
-        model.addAttribute("resCode", UUID.randomUUID().toString().replaceAll("-", ""));
-        return "/management/resource/add.jsp";
+    public String addPage(Model model, @RequestParam Integer parentId) {
+        model.addAttribute("parentId", parentId);
+        model.addAttribute("resCode", GlobalIdWorker.getInstance().nextId());
+        return "/system/resource/add";
     }
 
     @RequestMapping("/editPage")
-    public String editPage(Model model, HttpServletRequest request) {
+    public String editPage(Model model, @RequestParam Integer id) {
 
-        int id = Integer.parseInt(request.getParameter("id"));
         SysResource res = sysResourceService.find(id);
         model.addAttribute("vo", res);
-
-        return "/management/resource/edit.jsp";
+        return "/system/resource/edit";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public void add(SysResource res, HttpServletResponse response) {
+    public void add(SysResource sysResource) {
 
-        boolean isPass = sysResourceService.checkResourceCode(res.getResCode());
-//        if (isPass) {
-//            resMgr.addResource(res);
-//            writeDwzSignal("200", getMessage("msg.operation.success"), "", request, response);
-//        } else {
-//            writeDwzSignal("500", "资源码重复", "", request, response);
-//        }
+        boolean isPass = sysResourceService.checkResourceCode(sysResource.getResCode());
+        if (isPass) {
+            sysResourceService.insertSysResource(sysResource);
+        } else {
+
+        }
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public void edit(SysResource res, HttpServletResponse response) {
-
+    public void edit(SysResource res) {
         sysResourceService.updateSysResource(res);
     }
 
